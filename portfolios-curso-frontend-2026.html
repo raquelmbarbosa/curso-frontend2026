@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfólios — Curso de Front-End 2026</title>
+<style>
+  :root{
+    --navy: #0F2C5A;
+    --panel: #1A3F7F;
+    --code-bg: #081D3D;
+    --border-soft: rgba(255,255,255,.14);
+    --cyan: #5FD4E3;
+    --teal: #3FBF9F;
+    --yellow: #F0C94D;
+    --rose: #E97CA0;
+    --ink: #EAF0FA;
+    --ink-soft: #9FB3D6;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--navy);
+    color:var(--ink);
+    font-family:'Calibri','Segoe UI',Arial,sans-serif;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:72px 40px 48px 40px;
+    text-align:center;
+    border-bottom:1px solid rgba(255,255,255,.1);
+  }
+  .hero .eyebrow{
+    font-family:'Courier New',monospace;
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:'Cambria',Georgia,serif;
+    font-size:44px;
+    margin:0 0 16px 0;
+  }
+  .hero .desc{
+    color:var(--ink);
+    font-size:16.5px;
+    max-width:680px;
+    margin:0 auto 12px auto;
+    line-height:1.6;
+  }
+  .hero .note{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    max-width:600px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+
+  /* ---------- NAV DE PROJETOS ---------- */
+  .project-nav{
+    max-width:900px;
+    margin:32px auto 0 auto;
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:0 24px;
+  }
+  .project-nav a{
+    text-decoration:none;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--ink);
+    background:var(--panel);
+    border:1px solid var(--border-soft);
+    padding:9px 18px;
+    border-radius:999px;
+    transition:background .15s, border-color .15s;
+  }
+  .project-nav a:hover{
+    background:var(--code-bg);
+    border-color:var(--ink-soft);
+  }
+
+  /* ---------- SEÇÃO DE PROJETO ---------- */
+  .project-section{
+    max-width:1180px;
+    margin:0 auto;
+    padding:64px 32px 16px 32px;
+  }
+  .project-header{
+    margin-bottom:32px;
+    padding-bottom:20px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .project-header .kicker{
+    font-family:'Courier New',monospace;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--yellow);
+    margin-bottom:6px;
+  }
+  .project-header h2{
+    font-family:'Cambria',Georgia,serif;
+    font-size:28px;
+    margin:0 0 8px 0;
+  }
+  .project-header p{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    max-width:640px;
+    margin:0;
+    line-height:1.6;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));
+    gap:26px;
+  }
+  .card{
+    background:var(--panel);
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid var(--border-soft);
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 14px 30px rgba(0,0,0,.3);
+  }
+  .browser-chrome{
+    background:var(--code-bg);
+    padding:9px 12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .dot{ width:9px; height:9px; border-radius:50%; }
+  .dot.r{ background:var(--rose); }
+  .dot.y{ background:var(--yellow); }
+  .dot.g{ background:var(--teal); }
+  .addr{
+    flex:1;
+    background:rgba(255,255,255,.06);
+    border-radius:5px;
+    font-family:'Courier New',monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    padding:4px 9px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin-left:4px;
+  }
+  .preview{
+    position:relative;
+    width:100%;
+    aspect-ratio:16/10;
+    background:linear-gradient(135deg, var(--code-bg), var(--panel));
+    overflow:hidden;
+  }
+  .preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:top;
+    display:block;
+  }
+  .fallback{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cambria',Georgia,serif;
+    font-size:44px;
+    font-weight:700;
+    color:rgba(255,255,255,.85);
+  }
+  .info{ padding:16px 18px 18px 18px; }
+  .info .name{
+    font-family:'Cambria',Georgia,serif;
+    font-size:17px;
+    margin:0 0 2px 0;
+  }
+  .info .proj{
+    color:var(--ink-soft);
+    font-size:13.5px;
+    margin:0 0 14px 0;
+  }
+  .links{ display:flex; gap:8px; }
+  .links a{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    font-size:12.5px;
+    font-weight:700;
+    padding:8px 10px;
+    border-radius:7px;
+    font-family:'Calibri','Segoe UI',Arial,sans-serif;
+  }
+  .btn-live{ background:var(--cyan); color:#06233F; }
+  .btn-live:hover{ filter:brightness(1.08); }
+  .btn-code{ background:transparent; color:var(--ink); border:1px solid rgba(255,255,255,.25); }
+  .btn-code:hover{ border-color:var(--ink); }
+
+  .empty-note{
+    grid-column:1/-1;
+    padding:32px;
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    border:1px dashed var(--border-soft);
+    border-radius:12px;
+  }
+
+  .footer{
+    text-align:center;
+    padding:56px 32px 40px 32px;
+    color:var(--ink-soft);
+    font-size:12.5px;
+    border-top:1px solid rgba(255,255,255,.1);
+    margin-top:40px;
+  }
+  .footer a{ color:var(--cyan); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Curso de Front-End · Turma 2026</div>
+  <h1>Portfólios da Turma</h1>
+  <p class="desc">
+    Curso presencial de desenvolvimento Front-End para iniciantes, com aulas guiadas em
+    laboratório e uma etapa final de projeto autônomo com mentoria. Ao longo das aulas,
+    os alunos constroem sites completos aplicando HTML, CSS e boas práticas de
+    responsividade, layout e organização de código.
+  </p>
+  <p class="note">
+    Esta página reúne os portfólios dos projetos desenvolvidos pela turma durante o curso.
+    Cada seção abaixo corresponde a um projeto proposto em aula — clique nos links para
+    navegar entre eles.
+  </p>
+
+  <div class="project-nav" id="projectNav"></div>
+</div>
+
+<div id="projectSections"></div>
+
+<div class="footer">
+  Curso de Front-End 2026 · Publicado com GitHub Pages
+</div>
+
+<script>
+  // ======================================================
+  // EDITE AQUI: um objeto por projeto do curso.
+  // - id: usado para o link de navegação (sem espaços/acentos)
+  // - title: nome do projeto, como aparece no menu e no título da seção
+  // - kicker: rótulo pequeno acima do título (ex: "Mini-Projeto 1")
+  // - description: uma frase sobre o que era o desafio do projeto
+  // - students: lista de alunos, igual ao modelo já usado antes
+  //   (name, project, liveUrl, repoUrl, previewImg)
+  // ======================================================
+  const projects = [
+    {
+      id: "frontconf",
+      title: "FrontConf",
+      kicker: "Mini-Projeto 1",
+      description: "Site de divulgação de um evento fictício, com cinco seções obrigatórias: sobre, programação, palestrantes, inscrição e contato.",
+      students: [
+        {
+          name: "Bernardo Silveira",
+          project: "FrontConf",
+          liveUrl: "https://bernardosilveira2204-pixel.github.io/site-evento/",
+          repoUrl: "https://github.com/bernardosilveira2204-pixel/site-evento",
+          previewImg: ""
+        },
+        {
+          name: "Francine Moraes",
+          project: "FrontConf",
+          liveUrl: "https://frangnmoraes.github.io/site-evento/index.html",
+          repoUrl: "https://github.com/frangnmoraes/site-evento",
+          previewImg: ""
+        }
+      ]
+    },
+    {
+      id: "cafearoma",
+      title: "Café Aroma",
+      kicker: "Mini-Projeto 2",
+      description: "Site institucional para uma cafeteria fictícia, com foco em cardápio, identidade visual e responsividade.",
+      students: [
+        // Adicione os alunos deste projeto no mesmo formato do FrontConf acima.
+        // Exemplo:
+    {
+      name: "Grazielli",
+      project: "Mini-Projeto 1 — Café Aroma",
+      liveUrl: "https://Grazielli-07.github.io/Cafe",
+      repoUrl: "https://github.com/Grazielli-07/Cafe",
+      previewImg: ""
+    },
+    {
+      name: "Francine Moraes",
+      project: "Mini-Projeto 1 — FrontEventos",
+      liveUrl: "https://frangnmoraes.github.io/Cafe-Aroma/index.html",
+      repoUrl: "https://github.com/frangnmoraes/Cafe-Aroma",
+      previewImg: ""
+    },
+    {
+      name: "Bruna Ayhadinne",
+      project: "Mini-Projeto 1 — FrontEventos",
+      liveUrl: "https://ayhadinne.github.io/cafe-aroma/",
+      repoUrl: "https://github.com/ayhadinne/Cafe-Aroma",
+      previewImg: ""
+    }
+      ]
+    }
+  ];
+
+  const accentClasses = ["r","y","g"];
+
+  function screenshotUrl(liveUrl){
+    // Serviço gratuito de captura de tela automática (sem chave de API).
+    // Limite do plano gratuito: 50 capturas por dia.
+    return `https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&meta=false&screenshot=&embed=screenshot.url`;
+  }
+  function shortUrl(url){ return url.replace(/^https?:\/\//,''); }
+  function initials(name){ return name.split(" ").map(p=>p[0]).slice(0,2).join("").toUpperCase(); }
+
+  const nav = document.getElementById("projectNav");
+  const sectionsWrap = document.getElementById("projectSections");
+
+  projects.forEach(project=>{
+    // link de navegação
+    const navLink = document.createElement("a");
+    navLink.href = `#${project.id}`;
+    navLink.textContent = project.title;
+    nav.appendChild(navLink);
+
+    // seção do projeto
+    const section = document.createElement("section");
+    section.className = "project-section";
+    section.id = project.id;
+
+    const header = document.createElement("div");
+    header.className = "project-header";
+    header.innerHTML = `
+      <div class="kicker">${project.kicker}</div>
+      <h2>${project.title}</h2>
+      <p>${project.description}</p>
+    `;
+    section.appendChild(header);
+
+    const grid = document.createElement("div");
+    grid.className = "grid";
+
+    if(project.students.length === 0){
+      grid.innerHTML = `<div class="empty-note">Nenhum projeto publicado ainda para ${project.title}.</div>`;
+    } else {
+      project.students.forEach((s, i)=>{
+        const img = s.previewImg || screenshotUrl(s.liveUrl);
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="browser-chrome">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <div class="addr">${shortUrl(s.liveUrl)}</div>
+          </div>
+          <div class="preview">
+            <div class="fallback">${initials(s.name)}</div>
+            <img src="${img}" alt="Preview de ${s.project}" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="info">
+            <p class="name">${s.name}</p>
+            <p class="proj">${s.project}</p>
+            <div class="links">
+              <a class="btn-live" href="${s.liveUrl}" target="_blank" rel="noopener">Ver site ↗</a>
+              <a class="btn-code" href="${s.repoUrl}" target="_blank" rel="noopener">Código ↗</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    section.appendChild(grid);
+    sectionsWrap.appendChild(section);
+  });
+</script>
+
+</body>
+</html>
