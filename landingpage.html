@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landing Page — Portfólios da Turma</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">&larr; Voltar aos portfólios</a>
+</div>
+
+<div class="header">
+  <div class="kicker">Mini-Projeto 3</div>
+  <h1>Landing Page de Produto</h1>
+  <p>Página de apresentação (landing page) para um produto fictício, com foco em copywriting persuasivo, chamada para ação (CTA), seção de benefícios e responsividade.</p>
+</div>
+
+<div class="grid" id="gallery"></div>
+
+<div class="footer">
+  Curso de Front-End 2026 · Publicado com GitHub Pages
+</div>
+
+<script>
+  // ======================================================
+  // EDITE AQUI: um objeto por aluno que publicou este projeto.
+  // ======================================================
+  const students = [
+    // Adicione os alunos deste projeto no mesmo formato usado nas outras páginas.
+    // Exemplo:
+    // {
+    //   name: "Nome do Aluno",
+    //   project: "Mini-Projeto 3 — Landing Page",
+    //   liveUrl: "https://usuario.github.io/repositorio/",
+    //   repoUrl: "https://github.com/usuario/repositorio",
+    //   previewImg: ""
+    // },
+  ];
+
+  const accentClasses = ["r","y","g"];
+
+  function screenshotUrl(liveUrl){
+    return `https://api.microlink.io/?url=${encodeURIComponent(liveUrl)}&meta=false&screenshot=&embed=screenshot.url`;
+  }
+  function shortUrl(url){ return url.replace(/^https?:\/\//,''); }
+  function initials(name){ return name.split(" ").map(p=>p[0]).slice(0,2).join("").toUpperCase(); }
+
+  const gallery = document.getElementById("gallery");
+
+  if(students.length === 0){
+    gallery.innerHTML = `<div class="empty-note">Nenhum projeto publicado ainda.</div>`;
+  } else {
+    students.forEach((s)=>{
+      const img = s.previewImg || screenshotUrl(s.liveUrl);
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <div class="browser-chrome">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <div class="addr">${shortUrl(s.liveUrl)}</div>
+        </div>
+        <div class="preview">
+          <div class="fallback">${initials(s.name)}</div>
+          <img src="${img}" alt="Preview de ${s.project}" loading="lazy" onerror="this.style.display='none'">
+        </div>
+        <div class="info">
+          <p class="name">${s.name}</p>
+          <p class="proj">${s.project}</p>
+          <div class="links">
+            <a class="btn-live" href="${s.liveUrl}" target="_blank" rel="noopener">Ver site ↗</a>
+            <a class="btn-code" href="${s.repoUrl}" target="_blank" rel="noopener">Código ↗</a>
+          </div>
+        </div>
+      `;
+      gallery.appendChild(card);
+    });
+  }
+</script>
+
+</body>
+</html>
